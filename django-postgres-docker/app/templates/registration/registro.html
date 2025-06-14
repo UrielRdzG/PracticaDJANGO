@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Usuario</title>
+
+    <!-- Bootstrap 4 y FontAwesome -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Numans" rel="stylesheet">
+
+    <style>
+        html, body {
+            background-image: url('https://i0.wp.com/almomento.mx/wp-content/uploads/2019/08/INAUGURA-MARC-EDIFICIO-DE-LA-ESCOM-CUYA-INVERSIO%CC%81N-ASCENDIO%CC%81-A-58.6-MILLONES-DE-PESOS-3-1.jpg?fit=1417%2C850&ssl=1');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+            font-family: 'Numans', sans-serif;
+        }
+
+        .container {
+            height: 100%;
+            align-content: center;
+        }
+
+        .card {
+            margin: auto;
+            margin-top: 4%;
+            width: 500px;
+            background-color: rgba(0,0,0,0.6) !important;
+        }
+
+        .card-header h3,
+        .links {
+            color: white;
+        }
+
+        .input-group-prepend span {
+            width: 50px;
+            background-color: #005a91;
+            color: black;
+            border: 0;
+        }
+
+        .login_btn {
+            color: black;
+            background-color: #005a91;
+            width: 100%;
+        }
+
+        .login_btn:hover {
+            background-color: white;
+        }
+
+        .text-danger small {
+            color: #ffbaba;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>Registro de Usuario</h3>
+            </div>
+            <div class="card-body">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="input-group form-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        {{ form.username }}
+                    </div>
+                    {% if form.username.errors %}
+                        <div class="text-danger mb-2">
+                            {% for error in form.username.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group form-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-id-badge"></i></span>
+                                </div>
+                                {{ form.first_name }}
+                            </div>
+                            {% if form.first_name.errors %}
+                                <div class="text-danger mb-2">
+                                    {% for error in form.first_name.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <div class="input-group form-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-id-badge"></i></span>
+                                </div>
+                                {{ form.last_name }}
+                            </div>
+                            {% if form.last_name.errors %}
+                                <div class="text-danger mb-2">
+                                    {% for error in form.last_name.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="input-group form-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        {{ form.email }}
+                    </div>
+                    {% if form.email.errors %}
+                        <div class="text-danger mb-2">
+                            {% for error in form.email.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="input-group form-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        {{ form.password1 }}
+                    </div>
+                    {% if form.password1.errors %}
+                        <div class="text-danger mb-2">
+                            {% for error in form.password1.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="input-group form-group mt-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        {{ form.password2 }}
+                    </div>
+                    {% if form.password2.errors %}
+                        <div class="text-danger mb-2">
+                            {% for error in form.password2.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn login_btn">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    ¿Ya tienes cuenta? <a href="{% url 'login' %}">&nbsp;Inicia sesión</a>
+                </div>
+                <div class="d-flex justify-content-center links">
+                    <a href="{% url 'index' %}">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>
