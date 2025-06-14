@@ -17,11 +17,13 @@ Repositorio de práctica con Django. Incluye funcionalidades de usuarios (regist
 1. **Clona el repositorio**  
    
    git clone https://github.com/UrielRdzG/PracticaDJANGO.git
+   
    cd PracticaDJANGO
    
 2- **Levantar contenedores y ejecutar migraciones**
    
    docker-compose up --build
+
    docker-compose exec web python manage.py migrate
 
 3- **Acceso a la aplicacion**
